@@ -7,6 +7,7 @@ package behaviouralpattern;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 interface Device {
     void On();
@@ -39,6 +40,7 @@ class TVDevice implements Device {
 
 interface Command {
     void execute();
+    void undo();
 }
 
 abstract class DeviceCommand implements Command {
@@ -56,6 +58,10 @@ class OnCommand extends DeviceCommand {
     public void execute() {
         device.On();
     }
+    @Override
+    public void undo() {
+        device.Off();
+    }
 }
 
 class OffCommand extends DeviceCommand {
@@ -65,6 +71,10 @@ class OffCommand extends DeviceCommand {
     @Override
     public void execute() {
         device.Off();
+    }
+    @Override
+    public void undo() {
+        device.On();
     }
 }
 
@@ -95,7 +105,7 @@ class FactoryCommand {
 
 class RemoteControl {
     private Command command;
-
+    private Stack<Command> commandHistory = new Stack<>();
     public void setCommand(int buttonNumber) {
         this.command = FactoryCommand.getCommand(buttonNumber);
     }
@@ -103,6 +113,14 @@ class RemoteControl {
     public void pressButton(int buttonNumber) {
         setCommand(buttonNumber);
         command.execute();
+        commandHistory.push(command);
+    }
+    public void pressUndo() {
+        if (!commandHistory.isEmpty()) {
+            commandHistory.pop().undo();
+        } else {
+            System.out.println("No commands to undo.");
+        }
     }
 }
 
@@ -110,8 +128,11 @@ public class CommandPattern {
     public static void main(String[] args) {
         RemoteControl remote = new RemoteControl();
         remote.pressButton(1); // AC is On
-        remote.pressButton(2); // AC is Off
         remote.pressButton(3); // TV is On
+        remote.pressUndo(); // TV is Off
+        remote.pressButton(2); // AC is Off
         remote.pressButton(4); // TV is Off
+        remote.pressUndo(); // TV is On
+        remote.pressUndo(); // AC is On    
     }
 }
