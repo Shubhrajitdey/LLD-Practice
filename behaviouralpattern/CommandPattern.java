@@ -1,3 +1,8 @@
+/*The Command Pattern is a behavioral design pattern that encapsulates a request as an object, 
+allowing for parameterization of clients with different requests, queuing of requests,
+ and logging of the requests. It lets you add features like undo, redo, logging, and dynamic command
+execution without changing the core business logic. */
+
 package behaviouralpattern;
 
 import java.util.HashMap;
