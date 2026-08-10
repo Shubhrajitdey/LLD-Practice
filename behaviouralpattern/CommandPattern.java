@@ -9,11 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+// Receiver interface
 interface Device {
     void On();
     void Off();
 }
-
+// Concrete implementation of Device for AC
 class ACDevice implements Device {
     @Override
     public void On() {
@@ -25,7 +26,7 @@ class ACDevice implements Device {
         System.out.println("AC is Off");
     }
 }
-
+// Concrete implementation of Device for TV
 class TVDevice implements Device {
     @Override
     public void On() {
@@ -37,19 +38,19 @@ class TVDevice implements Device {
         System.out.println("TV is Off");
     }
 }
-
+// Command interface
 interface Command {
     void execute();
     void undo();
 }
-
+// Abstract Command class to hold a reference to the device
 abstract class DeviceCommand implements Command {
     protected Device device;
     public DeviceCommand(Device device) {
         this.device = device;
     }
 }
-
+// Concrete Command for turning on the device
 class OnCommand extends DeviceCommand {
     public OnCommand(Device device) {
         super(device);
@@ -63,7 +64,7 @@ class OnCommand extends DeviceCommand {
         device.Off();
     }
 }
-
+// Concrete Command for turning off the device
 class OffCommand extends DeviceCommand {
     public OffCommand(Device device) {
         super(device);
@@ -78,6 +79,7 @@ class OffCommand extends DeviceCommand {
     }
 }
 
+// Factory class to manage command creation and mapping
 class FactoryCommand {
     // Registry mapping button slot numbers to Command Suppliers
     private static final Map<Integer, Command> commandRegistry = new HashMap<>();
@@ -103,6 +105,7 @@ class FactoryCommand {
     }
 }
 
+// Invoker class
 class RemoteControl {
     private Command command;
     private Stack<Command> commandHistory = new Stack<>();
@@ -124,6 +127,7 @@ class RemoteControl {
     }
 }
 
+//client code
 public class CommandPattern {
     public static void main(String[] args) {
         RemoteControl remote = new RemoteControl();
