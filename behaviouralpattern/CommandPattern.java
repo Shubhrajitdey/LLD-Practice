@@ -1,11 +1,13 @@
 /*The Command Pattern is a behavioral design pattern that encapsulates a request as an object, 
 allowing for parameterization of clients with different requests, queuing of requests,
  and logging of the requests. It lets you add features like undo, redo, logging, and dynamic command
-execution without changing the core business logic. */
+execution without changing the core business logic */
 
 package behaviouralpattern;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -79,6 +81,31 @@ class OffCommand extends DeviceCommand {
     }
 }
 
+class NightCommand implements Command {
+    private List<Command> commands;
+
+    public NightCommand(List<Command> commands) {
+        this.commands = commands;
+    }
+
+    @Override
+    public void execute() {
+        for (Command command : commands) {
+            command.execute();
+        }
+    }
+
+    @Override
+    public void undo() {
+        // Undo in reverse order so state restoration matches execution history
+        List<Command> reversed = new java.util.ArrayList<>(commands);
+        Collections.reverse(reversed);
+        for (Command command : reversed) {
+            command.undo();
+        }
+    }
+}
+
 // Factory class to manage command creation and mapping
 class FactoryCommand {
     // Registry mapping button slot numbers to Command Suppliers
@@ -94,6 +121,7 @@ class FactoryCommand {
         commandRegistry.put(2,  new OffCommand(ac));
         commandRegistry.put(3,  new OnCommand(tv));
         commandRegistry.put(4,  new OffCommand(tv));
+        commandRegistry.put(5,  new NightCommand(List.of(new OffCommand(ac), new OffCommand(tv))));
     }
 
     public static Command getCommand(int buttonNumber) {
