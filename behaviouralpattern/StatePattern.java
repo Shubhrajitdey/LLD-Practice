@@ -1,3 +1,7 @@
+/*The State Pattern is a behavioral design pattern that encapsulates state-specific behavior 
+into separate classes and delegates the behavior to the appropriate state object. 
+This allows the object to change its behavior without altering the underlying code.
+ */
 package behaviouralpattern;
 
 class OrderContext{
