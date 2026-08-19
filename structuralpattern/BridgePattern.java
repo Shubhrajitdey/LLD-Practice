@@ -1,4 +1,4 @@
-/*The Bridge Pattern is a structural design pattern that is used to decouple an abstraction 
+/*The Bridge Pattern is a structural design pattern that is used to decouple an abstractions 
 from its implementation so that the two can vary independently. */
 package structuralpattern;
 interface VideoQuality {
