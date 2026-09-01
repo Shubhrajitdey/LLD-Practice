@@ -1,7 +1,7 @@
 /*The Builder Pattern is a creational design pattern 
 that separates the construction of a complex object from its representation. 
 This allows you to create different types and representations of an object using 
-the same construction process. */
+the same construction process. **/
 
 package creationalpattern;
 import java.util.List;
