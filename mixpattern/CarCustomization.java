@@ -23,6 +23,13 @@ class Car{
         return new CarBuilder();
     }
 
+    @Override
+    public String toString(){
+        return "Car [sunroof=" + sunroof + 
+               ", leatherSeats=" + leatherSeats + 
+               ", GPS=" + gps + 
+               ", spoiler=" + spoiler + "]";
+    }
     public static class CarBuilder {
         private boolean sunroof = false;
         private boolean leatherSeats = false;
@@ -55,5 +62,11 @@ class Car{
     }
 }
 public class CarCustomization {
-    Car carObj = Car.builder().withGPS(true).withSunroof(true).build();
+    public static void main(String[] args) {
+        Car carObj = Car.builder()
+            .withGPS(true)
+            .withSunroof(true)
+            .build();
+        System.out.println(carObj);
+    }
 }
