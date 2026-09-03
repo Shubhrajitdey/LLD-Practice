@@ -5,8 +5,6 @@ Explain how your design structurally prevents mixing styles by mistake.
  */
 package mixpattern;
 
-import java.util.*;
-
 interface Sofa{
     public void sofaColor();
 }
@@ -38,58 +36,44 @@ class ModernChair implements Chair{
     }
 }
 
-interface FurnitureType{
-    public void selectFurniture();
+//factory to group family wise feature
+interface FurnitureFactory {
+    Sofa createSofa();
+    Chair createChair();
 }
 
-class VictorianFurniture implements FurnitureType{
-    @Override
-    public void selectFurniture(){
-        Sofa sofaobj = new VictorianSofa();
-        sofaobj.sofaColor();
-
-        Chair chairObj = new VictorianChair();
-        chairObj.chairColor();
-    }
+//concrete implementation of victorian family type
+class VictorianFurnitureFactory implements FurnitureFactory {
+    public Sofa createSofa() { return new VictorianSofa(); }
+    public Chair createChair() { return new VictorianChair(); }
 }
 
-class MordernFurniture implements FurnitureType{
-    @Override
-    public void selectFurniture(){
-        Sofa sofaobj = new ModernSofa();
-        sofaobj.sofaColor();
-
-        Chair chairObj = new ModernChair();
-        chairObj.chairColor();
-    }
+//concrete implementation of Modern family type
+class ModernFurnitureFactory implements FurnitureFactory {
+    public Sofa createSofa() { return new ModernSofa(); }
+    public Chair createChair() { return new ModernChair(); }
 }
 
-class FurnitureFactory {
-    
-    private static Map<String, FurnitureType> furniMap = new HashMap<>();
-    static  {
-        furniMap.put("Victorian", new VictorianFurniture());
-        furniMap.put("Modern", new MordernFurniture());
-    }
-    public static FurnitureType getFurnitureType(String type){
-        return furniMap.get(type);
-    }
-}
-
+//client side service class to hold the execusion
 class FurnitureService {
-    public void buyFurnitureSet(String type){
-        FurnitureType furnitureType = FurnitureFactory.getFurnitureType(type);
-        furnitureType.selectFurniture();
+    private final FurnitureFactory furnitureFactory;
+    public FurnitureService(FurnitureFactory furnitureFactory) {
+        this.furnitureFactory = furnitureFactory;
+    }
+    public void buyFurnitureSet(){
+        Chair chairobj = furnitureFactory.createChair();
+        chairobj.chairColor();
+        Sofa sofaobj = furnitureFactory.createSofa();
+        sofaobj.sofaColor();
     }
 }
-
-
 
 public class FurnitureStyleSets {
     public static void main(String[] args) {
-        FurnitureService furnitureService = new FurnitureService();
-        furnitureService.buyFurnitureSet("Victorian");
-        furnitureService.buyFurnitureSet("Modern");
+        FurnitureService modernfurnitureService = new FurnitureService(new ModernFurnitureFactory());
+        modernfurnitureService.buyFurnitureSet();
+        FurnitureService victorianfurnitureService = new FurnitureService(new VictorianFurnitureFactory());
+        victorianfurnitureService.buyFurnitureSet();
     }
     
 }
