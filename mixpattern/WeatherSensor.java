@@ -4,9 +4,10 @@ class Sensor{
 
     private Sensor(){} // private constructure
     
-    //lazy loading
+    //lazy loading static class only load when it get executed
     private static class SingletonHelper {
-        private static final Sensor INSTANCE = new Sensor(); // making it final making sure thread safe
+        private static final Sensor INSTANCE = new Sensor(); // a class is loaded/initialized exactly once, 
+        // and the JVM handles the synchronization for you internally making it thread safe
     }
     public static Sensor getSensor(){
         return SingletonHelper.INSTANCE; // return the instance from public method
@@ -55,8 +56,10 @@ class Sensor{
     public static Sensor getSensor(){
         if(instance == null){
             synchronized(Sensor.class){
-                instance = new Sensor();
-                return instance;
+                if(instance == null){
+                    instance = new Sensor();
+                    return instance;
+                }
             }
         }
         return instance;
