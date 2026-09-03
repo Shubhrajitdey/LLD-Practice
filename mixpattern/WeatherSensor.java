@@ -1,5 +1,9 @@
-package mixpattern;
+/*Implement a WeatherSensor class that simulates an expensive calibration step on creation. 
+Ensure that no matter how many parts of your program request the sensor, 
+they always get the exact same instance — and make it safe for multiple threads to request it simultaneously. 
+Explain what would break if you didn't handle the multi-threaded case. */
 
+package mixpattern;
 class Sensor{
 
     private Sensor(){} // private constructure
