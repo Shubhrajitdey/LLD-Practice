@@ -1,7 +1,7 @@
 /*Implement a furniture ordering system with two styles — Victorian and Modern — 
 each producing a matching Sofa, Chair, and Table. The client picks a style once, 
 and every piece produced afterward must belong to that same style — no mixing allowed. 
-Explain how your design structurally prevents mixing styles by mistake.
+Explain how your design structurally prevents mixing styles by mistake...
  */
 package mixpattern;
 
