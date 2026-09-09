@@ -17,15 +17,16 @@ class PromoService{
     }
 }
 
-class FacadeImplementation{
-    int totalprice;
-    public int getShippingEstimate(){
-        totalprice += new TaxService().taxAmount();
-        totalprice += new ShippingRateService().shippingAmount();
-        totalprice += new PromoService().promoService();
+class FacadeImplementation {
+    private TaxService taxService = new TaxService();
+    private ShippingRateService shippingRateService = new ShippingRateService();
+    private PromoService promoService = new PromoService();
 
-        return totalprice;
-
+    public int getShippingEstimate() {
+        int total = taxService.taxAmount();
+        total += shippingRateService.shippingAmount();
+        total -= promoService.promoService();
+        return total;
     }
 }
 
