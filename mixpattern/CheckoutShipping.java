@@ -12,7 +12,7 @@ class ShippingRateService{
 }
 
 class PromoService{
-    public int promoService(){
+    public int getDiscount(){
         return 50;
     }
 }
@@ -25,7 +25,7 @@ class FacadeImplementation {
     public int getShippingEstimate() {
         int total = taxService.taxAmount();
         total += shippingRateService.shippingAmount();
-        total -= promoService.promoService();
+        total -= promoService.getDiscount();
         return total;
     }
 }
