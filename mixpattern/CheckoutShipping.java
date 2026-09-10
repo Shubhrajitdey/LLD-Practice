@@ -2,7 +2,7 @@ package mixpattern;
 
 class TaxService{
     public int taxAmount(){
-        return 10;
+        return 20;
     }
 }
 class ShippingRateService{
