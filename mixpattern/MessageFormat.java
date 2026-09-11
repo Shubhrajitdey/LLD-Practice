@@ -1,6 +1,4 @@
 package mixpattern;
-
-
 interface FormatType{
     public String sendMessage(String s);
 }
@@ -56,5 +54,8 @@ public class MessageFormat {
 
         FormatType applyStrikeThroughItalic = new ItalicFormat(new StrikeThroughFormat(new BaseFormat()));
         System.out.println(applyStrikeThroughItalic.sendMessage("Message Format Test"));
+
+        FormatType applyDoubleItalic = new ItalicFormat(new ItalicFormat(new BaseFormat()));
+        System.out.println(applyDoubleItalic.sendMessage("Message Format Test"));
     }
 }
