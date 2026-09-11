@@ -25,7 +25,7 @@ class VideoStreamProxy implements Stream{
                 videostream.play(userName, type);
             }
         }else{
-            System.out.println("Playing video with Add for non subscribed user "+ userName);
+            System.out.println("Access denied: subscription required for " + userName);
         }
         
     }
