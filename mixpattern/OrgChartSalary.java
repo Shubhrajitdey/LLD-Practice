@@ -22,14 +22,13 @@ class Employee implements OrgFlow{
 
 class Department implements OrgFlow{
     private final List<OrgFlow> employeeList = new ArrayList<>();
-    private int totalsalary;
-
     public void addEmployee(OrgFlow employmentType){
         employeeList.add(employmentType);
     }
 
     @Override 
     public int getTotalSalary(){
+        int totalsalary = 0;
         for(OrgFlow obj:employeeList){
             totalsalary += obj.getTotalSalary();
         }
