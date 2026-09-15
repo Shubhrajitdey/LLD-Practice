@@ -14,7 +14,7 @@ abstract class SupportHandler{
 class GeneralSupport extends SupportHandler{
     public void handleRequest(String requestType){
         if(requestType.equalsIgnoreCase("general")){
-            System.out.println("General support handling query support");
+            System.out.println("General support handling query support check");
         }else if (nextHandler != null) {
             nextHandler.handleRequest(requestType);
         }
