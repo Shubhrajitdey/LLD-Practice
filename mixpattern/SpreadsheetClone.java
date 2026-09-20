@@ -19,7 +19,7 @@ class SpreedSheet implements Cloneable{
         try{
             return (SpreedSheet) super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new AssertionError("Clone not supported", e); // Should never happen
+            throw new AssertionError("Clone not supportedd", e); // Should never happen
         }
     }
 }
