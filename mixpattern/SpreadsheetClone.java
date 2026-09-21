@@ -34,7 +34,7 @@ class CellStyle{
         this.end = end;
     }
     public void show(){
-        System.out.println("Cell looks like color:" + color + " start : "+ start + " end :" + end);
+        System.out.println("Cell looks like colorr:" + color + " start : "+ start + " end :" + end);
     }
 }
 
