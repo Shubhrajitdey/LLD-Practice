@@ -53,5 +53,18 @@ public class SpreadsheetClone {
 
         System.out.println("--- Sheet 1 ---");
         sheet1.display();
+
+        SpreedSheet sheet2 = sheet1.clone();
+
+        System.out.println("--- Sheet 2 (right after clone) ---");
+        sheet2.display();
+
+        sheet2.modifycell("Blue", 20, 45);
+
+        System.out.println("--- Sheet 1 after sheet 2 modified---");
+        sheet1.display();          // should show ONLY Red now — proves independence
+
+        System.out.println("--- Sheet 2 after sheet 2 modified ---");
+        sheet2.display();          // should show Red AND Blue
     }
 }
