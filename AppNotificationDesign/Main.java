@@ -201,9 +201,14 @@ public class Main { // Rename to Solution if on CoderPad/HackerRank
             smsAdapter
         );
 
+        Notifier notificationPipelineSMS = new SmsDecorator(
+                new PushNotifier(),smsAdapter
+        );
+
         // 3. Register Observers
         OrderService orderService = new OrderService();
         orderService.registerListener(new CustomerNotificationListener(notificationPipeline));
+        orderService.registerListener(new CustomerNotificationListener(notificationPipelineSMS));
         orderService.registerListener(new AnalyticsListener());
 
         // 4. Trigger Execution
