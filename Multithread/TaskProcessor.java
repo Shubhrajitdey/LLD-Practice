@@ -20,7 +20,8 @@ public class TaskProcessor {
     }
     public static void main(String[] args) {
         TaskProcessor taskProcessor = new TaskProcessor();
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        //ExecutorService executorService = Executors.newFixedThreadPool(10);
+        ExecutorService executorService = Executors.newCachedThreadPool();
         List<Future<String>> futureresultList = new ArrayList<>();
 
         System.out.println("Submitting 25 tasks to 10 worker threads...");
