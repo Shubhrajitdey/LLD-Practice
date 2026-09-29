@@ -13,7 +13,7 @@ public class CustomExecutor {
     public String executeComputation(int taskId) throws Exception {
         // Simulate real work (e.g., an external API or DB call)
         Thread.sleep(150);
-        return "Task #" + taskId + " handled by " + Thread.currentThread().getName();
+        return "Task #" + taskId + " handled by " + Thread.currentThread().getName()+ " ";
     }
 
     public static void main(String[] args) {
