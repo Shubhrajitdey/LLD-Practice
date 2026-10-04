@@ -13,7 +13,7 @@ class OrderProcessingGateway{
     private final Object transactionLock = new Object();
 
     public OrderProcessingGateway() {
-        inventory.put("LAPTOP_01", 8);
+        inventory.put("LAPTOP_01", 12);
         userWallets.put("USER_101", 5000.0);
     }
 
