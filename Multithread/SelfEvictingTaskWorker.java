@@ -64,7 +64,7 @@ public class SelfEvictingTaskWorker {
             try { 
                 Thread.sleep(1000); 
             }catch (InterruptedException ignored) {
-                
+
             }
             while (true) {
                 boolean done = explock.acquireAndExecute(() -> {
@@ -76,7 +76,7 @@ public class SelfEvictingTaskWorker {
                 } else {
                     System.out.println("Worker2 waiting for lock...");
                     try { 
-                        Thread.sleep(500); 
+                        Thread.sleep(1000); 
                     }catch(InterruptedException ignored) {
 
                     }
