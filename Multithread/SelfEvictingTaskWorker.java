@@ -9,20 +9,19 @@ import java.util.concurrent.locks.ReentrantLock;
 class ExpiringTaskWorker{
     private final ReentrantLock lock = new ReentrantLock();
     private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-    private volatile boolean islocked = false;
 
     public boolean acquireAndExecute(Runnable task,long timeout){
         if (!lock.tryLock()) {
             return false;
         }
         Thread currentWorker = Thread.currentThread();
-        
+        System.out.println("inside acquireAndExecute with thread :"+ currentWorker.getName());
         //future scheduler to interrupt in case task not completed within the time
         ScheduledFuture<?> timeoutFuture = scheduler.schedule(() -> {
             System.out.println("Timeout reached – interrupting " + currentWorker.getName());
             currentWorker.interrupt();
         }, timeout, TimeUnit.MILLISECONDS);
-
+        System.out.println("Scheduler thread timer started to waking up :"+ currentWorker.getName());
         //execute actual task 
         try {
             task.run();
@@ -51,13 +50,13 @@ public class SelfEvictingTaskWorker {
             explock.acquireAndExecute(() ->{
                 System.out.println("Worker1 starting the long task.....");
                 try { 
-                    Thread.sleep(5000);
+                    Thread.sleep(20000);
                     System.out.println("Worker1 completed task.");
                 } 
                 catch (InterruptedException ignored) {
                     System.out.println("Worker1 was interrupted due to timeout!");
                 }
-            }, 2000);
+            }, 10000);
         },"worker1");
 
         Thread worker2 = new Thread(() -> {
