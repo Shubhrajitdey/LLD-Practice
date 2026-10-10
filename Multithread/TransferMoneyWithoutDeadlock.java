@@ -1,3 +1,10 @@
+/*How would you rewrite transferMoney to guarantee deadlock cannot happen?
+
+Hint: There are two popular industry patterns to solve this:
+
+Technique A: Consistent Lock Ordering (e.g., using account IDs or System.identityHashCode).
+
+Technique B: Timed acquisition with tryLock() and retry/backoff. */
 package Multithread;
 
 import java.util.Arrays;
