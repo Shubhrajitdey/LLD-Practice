@@ -1,3 +1,12 @@
+/*In a distributed or microservice-backed inventory system, ordering locks by ID isn't always feasible (e.g., resources are acquired dynamically based on user cart contents, external API calls, or across multiple microservices where a global total order is hard to enforce).
+
+Instead of strict ordering, production systems break deadlock by breaking the "Hold and Wait" condition:
+
+A thread tries to acquire the first resource.
+
+It attempts to acquire the second resource with a timeout.
+
+If it fails to acquire the second lock, it must not hold onto the first lock! It immediately releases the first lock, waits for a randomized short duration (backoff), and retries from scratch. */
 package Multithread;
 
 import java.util.concurrent.ThreadLocalRandom;
