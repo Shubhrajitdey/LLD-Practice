@@ -107,5 +107,6 @@ public class BatchProcessor {
         //       - Catch ExecutionException and InterruptedException
 
         // TODO: Graceful shutdown (executor.shutdown() + awaitTermination())
+        // will implemented coming weekend
     }
 }
