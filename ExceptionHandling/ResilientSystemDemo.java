@@ -1,5 +1,4 @@
 package ExceptionHandling;
-import java.util.Random;
 import java.util.concurrent.*;
 import java.util.function.Supplier;
 
@@ -118,8 +117,6 @@ class ResilientPaymentClient {
 public class ResilientSystemDemo {
     public static void main(String[] args) throws InterruptedException {
         ResilientPaymentClient client = new ResilientPaymentClient();
-        Random random = new Random();
-
         // Simulate a flaky downstream payment service (slow/failing initially, recovers later)
         Supplier<String> flakyDownstreamService = () -> {
             try {
