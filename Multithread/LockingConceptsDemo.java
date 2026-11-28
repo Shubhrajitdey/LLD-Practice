@@ -43,7 +43,7 @@ public class LockingConceptsDemo {
             }
         });
 
-        Thread.sleep(500); // Ensure Withdraw Thread starts waiting first
+        Thread.sleep(5000); // Ensure Withdraw Thread starts waiting first
 
         // Thread B deposits $500 and signals the Condition to wake Thread A
         executor.submit(() -> {
